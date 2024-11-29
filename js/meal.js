@@ -23,7 +23,7 @@ async function fetchMealDetails() {
           <h3 class="card-title">${meal.strMeal}</h3>
           <p class="card-text">${meal.strInstructions}</p>
           <button class="btn ${
-            isFavorite(mealId) ? "btn-success" : "btn-primary"
+            isFavorite(mealId) ? "btn-danger" : "btn-primary"
           }" 
                                     id="fav-btn-${mealId}" 
                                     onclick="toggleFavorite(${mealId}, this)">
