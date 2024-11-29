@@ -1,8 +1,10 @@
 // Fetch meal details by ID from the API
 async function fetchMealById(mealId) {
+  console.log("meald fetchmeal", mealId);
   const response = await fetch(
     `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`
   );
+
   const data = await response.json();
   return data.meals[0]; // Return the meal object
 }
@@ -11,6 +13,8 @@ async function fetchMealById(mealId) {
 async function displayFavourites() {
   const favouritesList = document.getElementById("favouritesList");
   const favouriteIds = JSON.parse(localStorage.getItem("favorites")) || [];
+  console.log("favouriteIds line 14", favouriteIds);
+  console.log("favouriteIds line 15", favouriteIds.length);
 
   if (favouriteIds.length === 0) {
     favouritesList.innerHTML = `
@@ -19,9 +23,12 @@ async function displayFavourites() {
       </div>`;
     return;
   }
+  console.log("Meals case 1");
 
   // Fetch details of all meals
   const meals = await Promise.all(favouriteIds.map((id) => fetchMealById(id)));
+
+  console.log("Meals case2", meals);
 
   // Render the meals in a grid layout
   favouritesList.innerHTML = meals
